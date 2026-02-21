@@ -1,0 +1,55 @@
+"use client";
+
+import { motion } from "framer-motion";
+
+export default function CTASection() {
+    return (
+        <section className="py-32 relative" id="cta">
+            <div className="section-divider mb-32" />
+
+            {/* Background glow */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <div className="w-[600px] h-[400px] bg-radial from-[#5E6AD2]/10 to-transparent blur-[120px] opacity-50" />
+            </div>
+
+            <div className="mx-auto max-w-[1200px] px-6 relative z-10">
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                    className="text-center"
+                >
+                    <h2 className="text-[clamp(36px,5vw,60px)] font-medium leading-[1.05] tracking-[-0.03em] mb-8">
+                        Built for the future.
+                        <br />
+                        Available today.
+                    </h2>
+
+                    <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: 0.3 }}
+                        className="flex items-center justify-center gap-4"
+                    >
+                        <a
+                            href="#"
+                            id="cta-get-started"
+                            className="px-6 py-2.5 text-[14px] font-medium bg-white text-black rounded-md hover:bg-white/90 transition-all duration-200 hover:shadow-lg hover:shadow-white/10"
+                        >
+                            Get started
+                        </a>
+                        <a
+                            href="#"
+                            id="cta-contact-sales"
+                            className="px-6 py-2.5 text-[14px] font-medium text-white/80 rounded-md border border-white/[.15] hover:border-white/[.3] hover:text-white transition-all duration-200"
+                        >
+                            Contact sales
+                        </a>
+                    </motion.div>
+                </motion.div>
+            </div>
+        </section>
+    );
+}
