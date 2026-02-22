@@ -1,11 +1,7 @@
 import Navbar from "./components/Navbar";
 import { Hero } from "@/components/ui/animated-hero";
 import HeroSection from "./components/HeroSection";
-import IntakeSection from "./components/IntakeSection";
-import PlanSection from "./components/PlanSection";
-import BuildSection from "./components/BuildSection";
-import ReviewSection from "./components/ReviewSection";
-import CTASection from "./components/CTASection";
+import PricingSection from "@/components/ui/pricing-section-3";
 import Footer from "./components/Footer";
 
 export default function Home() {
@@ -14,11 +10,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <HeroSection />
-      <IntakeSection />
-      <PlanSection />
-      <BuildSection />
-      <ReviewSection />
-      <CTASection />
+      <PricingSection />
       <Footer />
     </main>
   );

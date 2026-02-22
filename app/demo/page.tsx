@@ -310,13 +310,17 @@ export default function DemoPage() {
                         </p>
                         <div className="flex items-center justify-center gap-3 relative z-10">
                             <a
-                                href="#"
+                                href="https://calendly.com/siddukaleekkal/new-meeting"
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="text-[13px] font-medium bg-white text-black px-6 py-2.5 rounded-md hover:bg-white/90 transition-all duration-200"
                             >
                                 Get Started
                             </a>
                             <a
-                                href="#"
+                                href="https://calendly.com/siddukaleekkal/new-meeting"
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="text-[13px] font-medium text-[#8A8F98] hover:text-white px-6 py-2.5 rounded-md border border-white/[0.08] hover:border-white/[0.16] transition-all duration-200"
                             >
                                 Contact Sales

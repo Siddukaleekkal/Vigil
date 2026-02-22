@@ -80,13 +80,15 @@ function Hero() {
                         </h1>
 
                         <p className="text-lg md:text-xl leading-relaxed tracking-tight text-[#8A8F98] max-w-2xl text-center mt-6">
-                            The first AI-powered governance platform built for the EU AI Act. Automate risk classification, conformity assessments, and technical documentation — so you&apos;re audit-ready before the deadline.
+                            The first AI-powered governance platform built for the EU AI Act. Automate risk classification, conformity assessments, and technical documentation so you&apos;re audit-ready before the deadline.
                         </p>
                     </div>
                     <div className="flex flex-row gap-4 mt-8">
-                        <Button size="lg" className="gap-2 bg-white text-black hover:bg-white/90 rounded-full px-6 font-medium" id="hero-cta-trial">
-                            Start Free Trial <MoveRight className="w-4 h-4" />
-                        </Button>
+                        <a href="https://calendly.com/siddukaleekkal/new-meeting" target="_blank" rel="noopener noreferrer">
+                            <Button size="lg" className="gap-2 bg-white text-black hover:bg-white/90 rounded-full px-6 font-medium" id="hero-cta-trial">
+                                Start Free Trial <MoveRight className="w-4 h-4" />
+                            </Button>
+                        </a>
                         <a href="/demo">
                             <Button size="lg" className="gap-2 border-white/10 text-white hover:bg-white/10 rounded-full px-6 transition-colors" variant="outline" id="hero-cta-demo">
                                 Watch Demo <PlayCircle className="w-4 h-4" />

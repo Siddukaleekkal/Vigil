@@ -5,11 +5,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
-    { label: "Platform", href: "#platform" },
-    { label: "Solutions", href: "#solutions" },
-    { label: "Frameworks", href: "#frameworks" },
-    { label: "Pricing", href: "#pricing" },
-    { label: "Resources", href: "#resources" },
+    { label: "About", href: "/about" },
+    { label: "Frameworks", href: "/frameworks" },
+    { label: "Pricing", href: "/pricing" },
     { label: "Demo", href: "/demo" },
 ];
 
@@ -82,7 +80,9 @@ export default function Navbar() {
                         Log in
                     </a>
                     <a
-                        href="#"
+                        href="https://calendly.com/siddukaleekkal/new-meeting"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         id="nav-get-started"
                         className="text-[13px] font-medium bg-white text-black px-4 py-1.5 rounded-md hover:bg-white/90 transition-all duration-200"
                     >
@@ -130,7 +130,9 @@ export default function Navbar() {
                                 Log in
                             </a>
                             <a
-                                href="#"
+                                href="https://calendly.com/siddukaleekkal/new-meeting"
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="text-[14px] font-medium bg-white text-black px-4 py-2 rounded-md text-center mt-1"
                             >
                                 Get Started

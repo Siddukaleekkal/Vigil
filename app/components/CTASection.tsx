@@ -54,14 +54,18 @@ export default function CTASection() {
                         className="flex items-center justify-center gap-4"
                     >
                         <a
-                            href="#"
+                            href="https://calendly.com/siddukaleekkal/new-meeting"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             id="cta-get-started"
                             className="px-6 py-2.5 text-[14px] font-medium bg-white text-black rounded-md hover:bg-white/90 transition-all duration-200 hover:shadow-lg hover:shadow-white/10"
                         >
                             Start Free Trial
                         </a>
                         <a
-                            href="#"
+                            href="https://calendly.com/siddukaleekkal/new-meeting"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             id="cta-contact-sales"
                             className="px-6 py-2.5 text-[14px] font-medium text-white/80 rounded-md border border-white/[.15] hover:border-white/[.3] hover:text-white transition-all duration-200"
                         >

@@ -58,7 +58,7 @@ export default function Footer() {
                         <img
                             src="/vigil-logo.png"
                             alt="Vigil"
-                            className="h-20 w-auto invert mix-blend-screen opacity-80"
+                            className="h-32 w-auto invert mix-blend-screen opacity-80"
                         />
                     </div>
 
