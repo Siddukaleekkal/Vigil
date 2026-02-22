@@ -1,7 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Play, ArrowLeft, FileText, ShieldAlert, ShieldCheck } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Play, ArrowLeft, FileText, ShieldAlert, ShieldCheck, ChevronDown, Image, Video } from "lucide-react";
 import { useState, useRef } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -52,14 +52,79 @@ const pdfs = [
     },
 ];
 
-const fadeUp = {
-    hidden: { opacity: 0, y: 24 },
-    visible: (i: number) => ({
-        opacity: 1,
-        y: 0,
-        transition: { duration: 0.5, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
-    }),
-};
+/* ── Accordion wrapper ──────────────────────────────── */
+function AccordionCard({
+    children,
+    title,
+    subtitle,
+    icon,
+    badge,
+    badgeColor,
+    defaultOpen = false,
+}: {
+    children: React.ReactNode;
+    title: string;
+    subtitle: string;
+    icon: React.ReactNode;
+    badge?: string;
+    badgeColor?: string;
+    defaultOpen?: boolean;
+}) {
+    const [open, setOpen] = useState(defaultOpen);
+
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+            className="rounded-xl border border-white/[0.08] bg-[#0A0A0A] overflow-hidden"
+        >
+            {/* Header — always visible, click to toggle */}
+            <button
+                onClick={() => setOpen(!open)}
+                className="w-full flex items-center gap-4 px-5 py-4 text-left hover:bg-white/[0.02] transition-colors cursor-pointer"
+            >
+                <div className="p-2 rounded-lg bg-white/[0.04] border border-white/[0.06] shrink-0">
+                    {icon}
+                </div>
+                <div className="flex-1 min-w-0">
+                    <h3 className="text-[15px] font-medium text-white">{title}</h3>
+                    <p className="text-[13px] text-[#8A8F98] mt-0.5 line-clamp-1">{subtitle}</p>
+                </div>
+                {badge && (
+                    <span className={`text-[11px] font-medium px-2.5 py-1 rounded-full border shrink-0 hidden sm:inline-flex ${badgeColor}`}>
+                        {badge}
+                    </span>
+                )}
+                <motion.div
+                    animate={{ rotate: open ? 180 : 0 }}
+                    transition={{ duration: 0.25 }}
+                    className="shrink-0 text-[#5C5F66]"
+                >
+                    <ChevronDown size={18} />
+                </motion.div>
+            </button>
+
+            {/* Expandable content */}
+            <AnimatePresence initial={false}>
+                {open && (
+                    <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                        className="overflow-hidden"
+                    >
+                        <div className="border-t border-white/[0.06]">
+                            {children}
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </motion.div>
+    );
+}
 
 export default function DemoPage() {
     const [videoPlaying, setVideoPlaying] = useState(false);
@@ -75,7 +140,7 @@ export default function DemoPage() {
             <Navbar />
 
             {/* Hero */}
-            <section className="pt-32 pb-16 relative overflow-hidden">
+            <section className="pt-32 pb-12 relative overflow-hidden">
                 <div className="hero-glow opacity-40" />
                 <div className="mx-auto max-w-[1200px] px-6 relative z-10">
                     <motion.a
@@ -101,199 +166,132 @@ export default function DemoPage() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-                        className="text-[#8A8F98] text-lg max-w-2xl"
+                        className="text-[#8A8F98] text-lg max-w-2xl mb-2"
                     >
                         Watch how Vigil detects prompt injection, enforces guardrails, and
                         protects AI pipelines in real time — using a live resume screening demo.
                     </motion.p>
+                    <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.3, duration: 0.5 }}
+                        className="text-[13px] text-[#5C5F66]"
+                    >
+                        Click any section below to expand it.
+                    </motion.p>
                 </div>
             </section>
 
-            {/* PDF Documents — Inline Viewers */}
-            <section className="pb-20">
-                <div className="mx-auto max-w-[1200px] px-6">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5 }}
-                        className="mb-12"
-                    >
-                        <h2 className="text-2xl sm:text-3xl font-medium tracking-tight mb-3">
-                            Test Documents
-                        </h2>
-                        <p className="text-[#8A8F98] text-[15px] max-w-xl">
-                            The two resumes used in this demo — one legitimate, one containing a
-                            hidden prompt injection attack targeting the AI scoring system.
-                        </p>
-                    </motion.div>
+            {/* All content in collapsible accordions */}
+            <section className="pb-12">
+                <div className="mx-auto max-w-[1200px] px-6 space-y-3">
 
-                    <div className="grid grid-cols-1 gap-10">
-                        {pdfs.map((pdf, i) => (
-                            <motion.div
-                                key={pdf.filename}
-                                custom={i}
-                                initial="hidden"
-                                whileInView="visible"
-                                viewport={{ once: true }}
-                                variants={fadeUp}
-                                className="rounded-xl border border-white/[0.08] bg-[#0A0A0A] overflow-hidden"
-                            >
-                                <div className="p-6 flex items-center justify-between border-b border-white/[0.06]">
-                                    <div className="flex items-center gap-4">
-                                        <div className="p-2.5 rounded-lg bg-white/[0.04] border border-white/[0.06]">
-                                            <FileText size={20} className="text-[#8A8F98]" />
-                                        </div>
-                                        <div>
-                                            <h3 className="text-[15px] font-medium text-white">
-                                                {pdf.title}
-                                            </h3>
-                                            <p className="text-[13px] text-[#8A8F98] mt-0.5">
-                                                {pdf.description}
-                                            </p>
-                                        </div>
+                    {/* ── Section: Platform Walkthrough (Video) ── */}
+                    <div>
+                        <div className="flex items-center gap-2 mb-3 mt-2">
+                            <Video size={14} className="text-[#8B5CF6]" />
+                            <span className="text-[12px] font-medium text-[#5C5F66] uppercase tracking-wider">Platform Walkthrough</span>
+                        </div>
+                        <AccordionCard
+                            title="Demo Video"
+                            subtitle="Watch Vigil's guardrails in action — from resume intake to real-time enforcement."
+                            icon={<Play size={18} className="text-[#8B5CF6]" />}
+                            defaultOpen
+                        >
+                            <div className="relative aspect-video bg-[#0A0A0A]">
+                                <div className="absolute -inset-px bg-gradient-to-b from-purple-500/10 via-transparent to-transparent pointer-events-none" />
+                                <video
+                                    ref={videoRef}
+                                    src="/demo/demo.mp4"
+                                    className={`w-full h-full object-contain transition-opacity duration-300 ${videoPlaying ? "opacity-100" : "opacity-30"}`}
+                                    controls={videoPlaying}
+                                    playsInline
+                                    preload="metadata"
+                                />
+                                {!videoPlaying && (
+                                    <div className="absolute inset-0 flex items-center justify-center">
+                                        <button
+                                            onClick={handlePlay}
+                                            className="flex items-center gap-3 px-6 py-3 rounded-full bg-white text-black text-sm font-medium hover:bg-white/90 transition-all duration-200 shadow-lg shadow-black/40 hover:scale-105"
+                                        >
+                                            <Play size={18} fill="currentColor" />
+                                            Watch Demo
+                                        </button>
                                     </div>
-                                    <span className={`text-[11px] font-medium px-2.5 py-1 rounded-full border shrink-0 ${pdf.tagColor}`}>
-                                        {pdf.tag}
-                                    </span>
-                                </div>
-                                <div className="bg-[#111]">
-                                    <iframe
-                                        src={`/demo/${pdf.filename}`}
-                                        className="w-full h-[700px]"
-                                        title={pdf.title}
-                                    />
-                                </div>
-                            </motion.div>
-                        ))}
+                                )}
+                            </div>
+                        </AccordionCard>
                     </div>
-                </div>
-            </section>
 
-            <div className="mx-auto max-w-[1200px] px-6">
-                <div className="section-divider" />
-            </div>
-
-            {/* Screenshots */}
-            <section className="py-20">
-                <div className="mx-auto max-w-[1200px] px-6">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5 }}
-                        className="mb-12"
-                    >
-                        <h2 className="text-2xl sm:text-3xl font-medium tracking-tight mb-3">
-                            Platform Screenshots
-                        </h2>
-                        <p className="text-[#8A8F98] text-[15px] max-w-xl">
-                            See how an unprotected AI pipeline compares to one secured by
-                            Vigil&apos;s three-layer guardrail stack.
-                        </p>
-                    </motion.div>
-
-                    <div className="grid grid-cols-1 gap-8">
-                        {screenshots.map((item, i) => {
-                            const Icon = item.icon;
-                            return (
-                                <motion.div
-                                    key={item.title}
-                                    custom={i}
-                                    initial="hidden"
-                                    whileInView="visible"
-                                    viewport={{ once: true }}
-                                    variants={fadeUp}
-                                    className="group rounded-xl border border-white/[0.08] bg-[#0A0A0A] overflow-hidden card-hover transition-all duration-300"
+                    {/* ── Section: Test Documents (PDFs) ── */}
+                    <div>
+                        <div className="flex items-center gap-2 mb-3 mt-8">
+                            <FileText size={14} className="text-[#4191E2]" />
+                            <span className="text-[12px] font-medium text-[#5C5F66] uppercase tracking-wider">Test Documents</span>
+                            <span className="text-[11px] text-[#5C5F66]/60 ml-1">— Resumes used in this demo</span>
+                        </div>
+                        <div className="space-y-3">
+                            {pdfs.map((pdf) => (
+                                <AccordionCard
+                                    key={pdf.filename}
+                                    title={pdf.title}
+                                    subtitle={pdf.description}
+                                    icon={<FileText size={18} className="text-[#8A8F98]" />}
+                                    badge={pdf.tag}
+                                    badgeColor={pdf.tagColor}
                                 >
-                                    <div className="relative overflow-hidden bg-[#111]">
-                                        <div className={`absolute inset-0 bg-gradient-to-b ${item.accent} via-transparent to-transparent opacity-50 pointer-events-none`} />
-                                        <img
-                                            src={item.src}
-                                            alt={item.title}
-                                            className="w-full h-auto object-contain"
+                                    <div className="bg-[#111]">
+                                        <iframe
+                                            src={`/demo/${pdf.filename}`}
+                                            className="w-full h-[700px]"
+                                            title={pdf.title}
                                         />
                                     </div>
-                                    <div className="p-6 flex items-start gap-4">
-                                        <div className="mt-0.5 p-2 rounded-lg bg-white/[0.04] border border-white/[0.06] shrink-0">
-                                            <Icon size={18} className="text-[#8A8F98]" />
+                                </AccordionCard>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* ── Section: Platform Screenshots ── */}
+                    <div>
+                        <div className="flex items-center gap-2 mb-3 mt-8">
+                            <Image size={14} className="text-[#4CAF50]" />
+                            <span className="text-[12px] font-medium text-[#5C5F66] uppercase tracking-wider">Platform Screenshots</span>
+                            <span className="text-[11px] text-[#5C5F66]/60 ml-1">— Unprotected vs. Vigil-protected</span>
+                        </div>
+                        <div className="space-y-3">
+                            {screenshots.map((item) => {
+                                const Icon = item.icon;
+                                return (
+                                    <AccordionCard
+                                        key={item.title}
+                                        title={item.title}
+                                        subtitle={item.description}
+                                        icon={<Icon size={18} className="text-[#8A8F98]" />}
+                                    >
+                                        <div className="relative overflow-hidden bg-[#111]">
+                                            <div className={`absolute inset-0 bg-gradient-to-b ${item.accent} via-transparent to-transparent opacity-50 pointer-events-none`} />
+                                            <img
+                                                src={item.src}
+                                                alt={item.title}
+                                                className="w-full h-auto object-contain"
+                                            />
                                         </div>
-                                        <div>
-                                            <h3 className="text-[16px] font-medium text-white mb-1.5">
-                                                {item.title}
-                                            </h3>
+                                        <div className="p-5">
                                             <p className="text-[13px] text-[#8A8F98] leading-relaxed max-w-2xl">
                                                 {item.description}
                                             </p>
                                         </div>
-                                    </div>
-                                </motion.div>
-                            );
-                        })}
+                                    </AccordionCard>
+                                );
+                            })}
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <div className="mx-auto max-w-[1200px] px-6">
-                <div className="section-divider" />
-            </div>
-
-            {/* Video Section */}
-            <section className="py-20 relative">
-                <div className="mx-auto max-w-[1200px] px-6">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5 }}
-                        className="mb-12"
-                    >
-                        <h2 className="text-2xl sm:text-3xl font-medium tracking-tight mb-3">
-                            Platform Walkthrough
-                        </h2>
-                        <p className="text-[#8A8F98] text-[15px] max-w-xl">
-                            Watch Vigil&apos;s guardrails in action — from resume intake to
-                            real-time enforcement.
-                        </p>
-                    </motion.div>
-
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                        className="relative rounded-2xl overflow-hidden border border-white/[0.08] bg-[#0A0A0A]"
-                    >
-                        <div className="absolute -inset-px rounded-2xl bg-gradient-to-b from-purple-500/10 via-transparent to-transparent pointer-events-none" />
-
-                        <div className="relative aspect-video bg-[#0A0A0A]">
-                            <video
-                                ref={videoRef}
-                                src="/demo/demo.mp4"
-                                className={`w-full h-full object-contain transition-opacity duration-300 ${videoPlaying ? "opacity-100" : "opacity-30"}`}
-                                controls={videoPlaying}
-                                playsInline
-                                preload="metadata"
-                            />
-
-                            {!videoPlaying && (
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                    <button
-                                        onClick={handlePlay}
-                                        className="flex items-center gap-3 px-6 py-3 rounded-full bg-white text-black text-sm font-medium hover:bg-white/90 transition-all duration-200 shadow-lg shadow-black/40 hover:scale-105"
-                                    >
-                                        <Play size={18} fill="currentColor" />
-                                        Watch Demo
-                                    </button>
-                                </div>
-                            )}
-                        </div>
-                    </motion.div>
-                </div>
-            </section>
-
             {/* CTA */}
-            <section className="pb-24">
+            <section className="pb-24 pt-8">
                 <div className="mx-auto max-w-[1200px] px-6">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
