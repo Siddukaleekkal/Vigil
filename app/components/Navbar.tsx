@@ -49,7 +49,7 @@ export default function Navbar() {
         >
             <nav className="mx-auto max-w-[1200px] flex items-center justify-between px-6 h-14">
                 {/* Logo */}
-                <a href="#" className="relative flex items-center justify-center w-28 h-14 overflow-hidden group" id="nav-logo">
+                <a href="/" className="relative flex items-center justify-center w-28 h-14 overflow-hidden group" id="nav-logo">
                     <img
                         src="/vigil-logo.png"
                         alt="Vigil"

@@ -23,6 +23,10 @@ export const metadata: Metadata = {
     "NIST AI RMF",
     "ISO 42001",
   ],
+  icons: {
+    icon: "/vigil-logo.png",
+    apple: "/vigil-logo.png",
+  },
   openGraph: {
     title: "Vigil – AI Governance & Compliance Platform",
     description:

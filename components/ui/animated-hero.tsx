@@ -87,9 +87,11 @@ function Hero() {
                         <Button size="lg" className="gap-2 bg-white text-black hover:bg-white/90 rounded-full px-6 font-medium" id="hero-cta-trial">
                             Start Free Trial <MoveRight className="w-4 h-4" />
                         </Button>
-                        <Button size="lg" className="gap-2 border-white/10 text-white hover:bg-white/10 rounded-full px-6 transition-colors" variant="outline" id="hero-cta-demo">
-                            Watch Demo <PlayCircle className="w-4 h-4" />
-                        </Button>
+                        <a href="/demo">
+                            <Button size="lg" className="gap-2 border-white/10 text-white hover:bg-white/10 rounded-full px-6 transition-colors" variant="outline" id="hero-cta-demo">
+                                Watch Demo <PlayCircle className="w-4 h-4" />
+                            </Button>
+                        </a>
                     </div>
                 </div>
             </div>
