@@ -1,42 +1,47 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { GitPullRequest, MessageSquare, Check, X } from "lucide-react";
+import { Shield, MessageSquare, Check, X, AlertTriangle } from "lucide-react";
 
-const beforeCode = [
-    { num: 1, content: "export function AppLauncher() {", type: "normal" as const },
-    { num: 2, content: "  const [state, setState] = useState(null);", type: "remove" as const },
-    { num: 3, content: "  const [loading, setLoading] = useState(true);", type: "remove" as const },
+const beforeAssessment = [
+    { num: 1, content: "// Risk Management System — Art. 9", type: "normal" as const },
+    { num: 2, content: "risk_identification: 'manual'", type: "remove" as const },
+    { num: 3, content: "risk_assessment: 'ad-hoc spreadsheet'", type: "remove" as const },
     { num: 4, content: "", type: "normal" as const },
-    { num: 5, content: "  useEffect(() => {", type: "normal" as const },
-    { num: 6, content: "    fetchVehicleState().then(data => {", type: "remove" as const },
-    { num: 7, content: "      setState(data);", type: "remove" as const },
-    { num: 8, content: "      setLoading(false);", type: "remove" as const },
-    { num: 9, content: "    });", type: "remove" as const },
-    { num: 10, content: "  }, []);", type: "normal" as const },
-    { num: 11, content: "", type: "normal" as const },
-    { num: 12, content: "  if (loading) return <Spinner />;", type: "remove" as const },
+    { num: 5, content: "// Data Governance — Art. 10", type: "normal" as const },
+    { num: 6, content: "training_data_audit: false", type: "remove" as const },
+    { num: 7, content: "bias_detection: 'none'", type: "remove" as const },
+    { num: 8, content: "data_provenance: 'undocumented'", type: "remove" as const },
+    { num: 9, content: "", type: "normal" as const },
+    { num: 10, content: "// Human Oversight — Art. 14", type: "normal" as const },
+    { num: 11, content: "override_capability: false", type: "remove" as const },
+    { num: 12, content: "escalation_path: 'undefined'", type: "remove" as const },
     { num: 13, content: "", type: "normal" as const },
-    { num: 14, content: "  return <Dashboard data={state} />;", type: "remove" as const },
-    { num: 15, content: "}", type: "normal" as const },
+    { num: 14, content: "conformity_status: 'NON_COMPLIANT'", type: "remove" as const },
+    { num: 15, content: "", type: "normal" as const },
 ];
 
-const afterCode = [
-    { num: 1, content: "export function AppLauncher() {", type: "normal" as const },
-    { num: 2, content: "  const { data, isReady } = useVehicleState({", type: "add" as const },
-    { num: 3, content: "    strategy: 'progressive',", type: "add" as const },
-    { num: 4, content: "    requiredFields: ['location', 'battery'],", type: "add" as const },
-    { num: 5, content: "  });", type: "add" as const },
+const afterAssessment = [
+    { num: 1, content: "// Risk Management System — Art. 9", type: "normal" as const },
+    { num: 2, content: "risk_identification: vigil.continuous({", type: "add" as const },
+    { num: 3, content: "  library: 'EU_AI_ACT_RISK_CATALOG',", type: "add" as const },
+    { num: 4, content: "  lifecycle: 'full_span',", type: "add" as const },
+    { num: 5, content: "})", type: "add" as const },
     { num: 6, content: "", type: "normal" as const },
-    { num: 7, content: "  return (", type: "add" as const },
-    { num: 8, content: "    <Suspense fallback={<ShellUI />}>", type: "add" as const },
-    { num: 9, content: "      <Dashboard", type: "add" as const },
-    { num: 10, content: "        data={data}", type: "add" as const },
-    { num: 11, content: "        progressive={!isReady}", type: "add" as const },
-    { num: 12, content: "      />", type: "add" as const },
-    { num: 13, content: "    </Suspense>", type: "add" as const },
-    { num: 14, content: "  );", type: "add" as const },
-    { num: 15, content: "}", type: "normal" as const },
+    { num: 7, content: "// Data Governance — Art. 10", type: "normal" as const },
+    { num: 8, content: "training_data_audit: vigil.audit({", type: "add" as const },
+    { num: 9, content: "  bias_detection: 'demographic_parity',", type: "add" as const },
+    { num: 10, content: "  data_provenance: 'sha256_verified',", type: "add" as const },
+    { num: 11, content: "  representativeness: 0.95,", type: "add" as const },
+    { num: 12, content: "})", type: "add" as const },
+    { num: 13, content: "", type: "normal" as const },
+    { num: 14, content: "// Human Oversight — Art. 14", type: "normal" as const },
+    { num: 15, content: "oversight: vigil.humanLoop({", type: "add" as const },
+    { num: 16, content: "  override: true,", type: "add" as const },
+    { num: 17, content: "  escalation: 'compliance_officer',", type: "add" as const },
+    { num: 18, content: "})", type: "add" as const },
+    { num: 19, content: "", type: "normal" as const },
+    { num: 20, content: "conformity_status: 'COMPLIANT' // ✓", type: "add" as const },
 ];
 
 function CodeLine({
@@ -79,10 +84,10 @@ function CodeLine({
 }
 
 const subLinks = [
-    { num: "4.1", label: "Pull Requests" },
-    { num: "4.2", label: "Agent review" },
-    { num: "4.3", label: "Approvals" },
-    { num: "4.4", label: "Merge workflow" },
+    { num: "4.1", label: "Conformity Assessment" },
+    { num: "4.2", label: "Gap Remediation" },
+    { num: "4.3", label: "Incident Reporting" },
+    { num: "4.4", label: "Audit Trail" },
 ];
 
 export default function ReviewSection() {
@@ -100,9 +105,9 @@ export default function ReviewSection() {
                         transition={{ duration: 0.7 }}
                     >
                         <h2 className="text-[clamp(32px,4vw,48px)] font-medium leading-[1.1] tracking-[-0.02em]">
-                            Review PRs and
+                            Conformity assessment,
                             <br />
-                            agent output
+                            simplified
                         </h2>
                     </motion.div>
 
@@ -113,8 +118,9 @@ export default function ReviewSection() {
                         transition={{ duration: 0.7, delay: 0.15 }}
                     >
                         <p className="text-[clamp(18px,1.6vw,22px)] text-[#8A8F98] leading-relaxed mb-4">
-                            Review pull requests and agent-generated code changes directly
-                            within Linear. Approve, comment, and merge without context switching.
+                            See the gap between where you are and where Article 9–15 requires
+                            you to be. Vigil shows the before and after of every compliance
+                            control, with automated remediation recommendations.
                         </p>
                         <a
                             href="#"
@@ -122,7 +128,7 @@ export default function ReviewSection() {
                             id="review-link"
                         >
                             <span className="font-mono text-[13px]">4.0</span>
-                            <span>Reviews</span>
+                            <span>Assess</span>
                             <span className="group-hover:translate-x-0.5 transition-transform">
                                 →
                             </span>
@@ -130,24 +136,24 @@ export default function ReviewSection() {
                     </motion.div>
                 </div>
 
-                {/* Code diff mockup */}
+                {/* Compliance diff mockup */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.7, delay: 0.2 }}
                     className="bg-[#0D0D0D] rounded-xl border border-white/[.06] overflow-hidden"
-                    id="code-diff"
+                    id="compliance-diff"
                 >
-                    {/* PR header */}
+                    {/* Assessment header */}
                     <div className="px-5 py-3 border-b border-white/[.04] flex items-center justify-between">
                         <div className="flex items-center gap-3">
-                            <GitPullRequest size={16} className="text-[#4CAF50]" />
+                            <Shield size={16} className="text-[#4CAF50]" />
                             <span className="text-[14px] font-medium text-white/90">
-                                feat: Progressive vehicle state loading
+                                Conformity Assessment: Credit Scoring Engine
                             </span>
                             <span className="text-[11px] text-[#5C5F66] bg-white/[.04] px-2 py-0.5 rounded-full">
-                                #2703
+                                SYS-001
                             </span>
                         </div>
                         <div className="flex items-center gap-2">
@@ -167,10 +173,12 @@ export default function ReviewSection() {
 
                     {/* File header */}
                     <div className="px-4 py-2 border-b border-white/[.04] flex items-center gap-2 text-[12px] text-[#5C5F66] font-mono bg-white/[.01]">
-                        <span className="text-[#4CAF50]">+28</span>
-                        <span className="text-[#E5484D]">-14</span>
+                        <span className="text-[#4CAF50]">+14 controls</span>
+                        <span className="text-[#E5484D]">-8 gaps</span>
                         <span className="mx-2 text-white/20">|</span>
-                        <span>src/components/AppLauncher.tsx</span>
+                        <span>governance/SYS-001-conformity.yaml</span>
+                        <AlertTriangle size={12} className="text-[#F2C94C] ml-auto" />
+                        <span className="text-[#F2C94C]">2 findings</span>
                     </div>
 
                     {/* Split diff view */}
@@ -178,10 +186,10 @@ export default function ReviewSection() {
                         {/* Before */}
                         <div>
                             <div className="px-4 py-1.5 border-b border-white/[.04] text-[11px] text-[#5C5F66] font-mono bg-[#E5484D]/5">
-                                Before
+                                Before — Non-Compliant
                             </div>
                             <div className="py-1">
-                                {beforeCode.map((line) => (
+                                {beforeAssessment.map((line) => (
                                     <CodeLine key={`b-${line.num}`} {...line} />
                                 ))}
                             </div>
@@ -189,10 +197,10 @@ export default function ReviewSection() {
                         {/* After */}
                         <div>
                             <div className="px-4 py-1.5 border-b border-white/[.04] text-[11px] text-[#5C5F66] font-mono bg-[#4CAF50]/5">
-                                After
+                                After — Vigil Remediation
                             </div>
                             <div className="py-1">
-                                {afterCode.map((line) => (
+                                {afterAssessment.map((line) => (
                                     <CodeLine key={`a-${line.num}`} {...line} />
                                 ))}
                             </div>

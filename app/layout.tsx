@@ -9,20 +9,24 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Linear – The product development system for teams and agents",
+  title: "Vigil – AI Governance & Compliance Platform | EU AI Act Ready",
   description:
-    "Purpose-built for planning and building products. Designed for the AI era. Linear helps teams streamline software projects, sprints, tasks, and bug tracking.",
+    "The enterprise AI governance platform built for the EU AI Act. Automate risk classification, conformity assessments, and technical documentation. Be audit-ready by August 2026.",
   keywords: [
-    "project management",
-    "issue tracking",
-    "agile",
-    "product development",
-    "AI agents",
+    "AI governance",
+    "EU AI Act",
+    "AI compliance",
+    "risk management",
+    "AI regulation",
+    "conformity assessment",
+    "AI audit",
+    "NIST AI RMF",
+    "ISO 42001",
   ],
   openGraph: {
-    title: "Linear – The product development system for teams and agents",
+    title: "Vigil – AI Governance & Compliance Platform",
     description:
-      "Purpose-built for planning and building products. Designed for the AI era.",
+      "Automate EU AI Act compliance. Risk classification, technical documentation, and real-time monitoring in one platform.",
     type: "website",
   },
 };

@@ -1,34 +1,34 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Bot, Terminal, CheckCircle2, Circle, Zap } from "lucide-react";
+import { FileText, Terminal, CheckCircle2, Circle, AlertCircle } from "lucide-react";
 
-const agentTasks = [
+const documentationTasks = [
     {
-        title: "Investigate memory leak in rendering pipeline",
+        title: "Generate Annex IV technical documentation for SYS-001",
         status: "done" as const,
-        agent: "Linear Agent",
-        time: "12min",
+        agent: "Vigil Agent",
+        time: "8min",
     },
     {
-        title: "Create migration for new schema changes",
+        title: "Compile training data provenance report for SYS-004",
         status: "in-progress" as const,
-        agent: "GitHub Copilot",
-        time: "3min",
+        agent: "Vigil Agent",
+        time: "2min",
     },
     {
-        title: "Write integration tests for auth flow",
+        title: "Run bias audit on HR screening model",
         status: "todo" as const,
-        agent: "Linear Agent",
+        agent: "Vigil Agent",
         time: "Queued",
     },
 ];
 
 const subLinks = [
-    { num: "3.1", label: "Issues" },
-    { num: "3.2", label: "Cycles" },
-    { num: "3.3", label: "Agents" },
-    { num: "3.4", label: "Automations" },
+    { num: "3.1", label: "Auto-Documentation" },
+    { num: "3.2", label: "Data Provenance" },
+    { num: "3.3", label: "Bias Auditing" },
+    { num: "3.4", label: "Conformity Checks" },
 ];
 
 function StatusIcon({ status }: { status: "done" | "in-progress" | "todo" }) {
@@ -48,7 +48,7 @@ function StatusIcon({ status }: { status: "done" | "in-progress" | "todo" }) {
 
 export default function BuildSection() {
     return (
-        <section className="py-24 relative" id="build">
+        <section className="py-24 relative" id="documentation">
             <div className="section-divider mb-24" />
 
             <div className="mx-auto max-w-[1200px] px-6">
@@ -61,9 +61,9 @@ export default function BuildSection() {
                         transition={{ duration: 0.7 }}
                     >
                         <h2 className="text-[clamp(32px,4vw,48px)] font-medium leading-[1.1] tracking-[-0.02em] text-gradient">
-                            Move work forward
+                            Technical documentation
                             <br />
-                            across teams and agents
+                            on autopilot
                         </h2>
                     </motion.div>
 
@@ -74,16 +74,17 @@ export default function BuildSection() {
                         transition={{ duration: 0.7, delay: 0.15 }}
                     >
                         <p className="text-[clamp(18px,1.6vw,22px)] text-[#8A8F98] leading-relaxed mb-4">
-                            Build and deploy AI agents that work alongside your team. Work on
-                            complex tasks together or delegate entire issues end-to-end.
+                            Articles 10–15 mandate exhaustive documentation. Vigil&apos;s AI agents
+                            automatically compile training data provenance, performance metrics,
+                            and risk mitigation records into audit-ready Annex IV documentation.
                         </p>
                         <a
                             href="#"
                             className="inline-flex items-center gap-2 text-[14px] text-[#5C5F66] hover:text-white/70 transition-colors group"
-                            id="build-link"
+                            id="documentation-link"
                         >
                             <span className="font-mono text-[13px]">3.0</span>
-                            <span>Build</span>
+                            <span>Documentation</span>
                             <span className="group-hover:translate-x-0.5 transition-transform">
                                 →
                             </span>
@@ -91,9 +92,9 @@ export default function BuildSection() {
                     </motion.div>
                 </div>
 
-                {/* Agent tasks mockup */}
+                {/* Documentation automation mockup */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    {/* Agent task list */}
+                    {/* Documentation task list */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -102,9 +103,9 @@ export default function BuildSection() {
                         className="bg-[#0D0D0D] rounded-xl border border-white/[.06] overflow-hidden"
                     >
                         <div className="px-4 py-3 border-b border-white/[.04] flex items-center gap-2">
-                            <Bot size={14} className="text-[#8B5CF6]" />
+                            <FileText size={14} className="text-[#8B5CF6]" />
                             <span className="text-[13px] font-medium text-white/80">
-                                Agent Tasks
+                                Compliance Tasks
                             </span>
                             <span className="text-[11px] text-[#5C5F66] bg-white/[.04] px-1.5 py-0.5 rounded-full ml-1">
                                 3
@@ -112,7 +113,7 @@ export default function BuildSection() {
                         </div>
 
                         <div className="divide-y divide-white/[.04]">
-                            {agentTasks.map((task, i) => (
+                            {documentationTasks.map((task, i) => (
                                 <motion.div
                                     key={task.title}
                                     initial={{ opacity: 0, x: -10 }}
@@ -131,7 +132,7 @@ export default function BuildSection() {
                                             </div>
                                             <div className="flex items-center gap-2 text-[11px] text-[#5C5F66]">
                                                 <span className="flex items-center gap-1">
-                                                    <Zap size={10} className="text-[#8B5CF6]" />
+                                                    <AlertCircle size={10} className="text-[#8B5CF6]" />
                                                     {task.agent}
                                                 </span>
                                                 <span>·</span>
@@ -160,7 +161,7 @@ export default function BuildSection() {
                         <div className="px-4 py-3 border-b border-white/[.04] flex items-center gap-2">
                             <Terminal size={14} className="text-[#4CAF50]" />
                             <span className="text-[13px] font-medium text-white/80">
-                                Linear Agent
+                                Vigil Agent
                             </span>
                             <span className="ml-auto flex items-center gap-1.5">
                                 <span className="w-2 h-2 rounded-full bg-[#4CAF50] animate-pulse" />
@@ -172,44 +173,47 @@ export default function BuildSection() {
                             <div className="text-[#4CAF50]">
                                 →{" "}
                                 <span className="text-[#8A8F98]">
-                                    Analyzing issue ENG-1460...
+                                    Generating Annex IV documentation for SYS-001...
                                 </span>
                             </div>
                             <div className="text-[#5C5F66]">
-                                ├── Reading codebase context from 12 files
+                                ├── Extracting training data metadata from 847 records
                             </div>
                             <div className="text-[#5C5F66]">
-                                ├── Identified WebSocket reconnect handler
+                                ├── Mapping performance metrics against Art. 15 thresholds
                             </div>
                             <div className="text-[#5C5F66]">
-                                └── Found root cause: event listeners not cleaned up
+                                └── Compiling risk mitigation strategies (Art. 9)
                             </div>
 
                             <div className="border-t border-white/[.04] pt-3">
                                 <div className="text-[#4191E2]">
-                                    ↳ Creating fix in{" "}
+                                    ↳ Writing to{" "}
                                     <span className="text-white/70">
-                                        src/handlers/websocket.ts
+                                        /docs/annex-iv/SYS-001-credit-scoring.pdf
                                     </span>
                                 </div>
                             </div>
 
                             <div className="bg-white/[.02] rounded-lg p-3 border border-white/[.04]">
                                 <div className="text-[#5C5F66] mb-1">
-                  // Fix: Clean up event listeners on disconnect
+                                    // Annex IV §2(b) — Data Governance Summary
                                 </div>
                                 <div className="diff-add px-2 py-0.5 rounded text-[#4CAF50]">
-                                    + socket.removeAllListeners(&apos;reconnect&apos;);
+                                    + Training data: 2.4M records | Validation split: 80/10/10
                                 </div>
                                 <div className="diff-add px-2 py-0.5 rounded text-[#4CAF50]">
-                                    + clearInterval(heartbeatTimer);
+                                    + Bias assessment: Passed (demographic parity Δ &lt; 0.05)
+                                </div>
+                                <div className="diff-add px-2 py-0.5 rounded text-[#4CAF50]">
+                                    + Data provenance: Verified (SHA-256 checksums attached)
                                 </div>
                             </div>
 
                             <div className="text-[#F2C94C] flex items-center gap-2">
                                 <span>⏳</span>
                                 <span className="text-[#8A8F98]">
-                                    Generating PR description...
+                                    Generating human oversight requirements (Art. 14)...
                                 </span>
                                 <span className="cursor-blink text-white/50">▊</span>
                             </div>
@@ -230,7 +234,7 @@ export default function BuildSection() {
                             key={link.num}
                             href="#"
                             className="text-[14px] text-[#5C5F66] hover:text-white/70 transition-colors py-3 border-t border-white/[.06]"
-                            id={`build-sub-${link.num}`}
+                            id={`doc-sub-${link.num}`}
                         >
                             <span className="font-mono text-[12px] mr-2 text-[#5C5F66]/60">
                                 {link.num}

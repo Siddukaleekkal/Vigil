@@ -4,37 +4,39 @@ import { motion } from "framer-motion";
 
 const footerColumns = [
     {
-        title: "Product",
+        title: "Platform",
         links: [
-            "Build",
-            "Reviews",
-            "Monitor",
-            "Pricing",
+            "AI Registry",
+            "Risk Classification",
+            "Documentation",
+            "Monitoring",
         ],
     },
     {
-        title: "Features",
+        title: "Frameworks",
         links: [
-            "Insights",
-            "Integrations",
-            "Changelog",
+            "EU AI Act",
+            "NIST AI RMF",
+            "ISO 42001",
+            "GDPR",
         ],
     },
     {
         title: "Company",
-        links: ["About", "Customers", "Quality", "Brand"],
+        links: ["About", "Customers", "Careers", "Press"],
     },
     {
         title: "Resources",
         links: [
             "Documentation",
-            "Developers",
-            "Enterprise",
+            "API Reference",
+            "Compliance Guide",
+            "Blog",
         ],
     },
     {
         title: "Connect",
-        links: ["Contact us", "Community"],
+        links: ["Contact Sales", "Support", "Community"],
     },
 ];
 
@@ -94,6 +96,9 @@ export default function Footer() {
                         </a>
                         <a href="#" className="hover:text-white/50 transition-colors">
                             DPA
+                        </a>
+                        <a href="#" className="hover:text-white/50 transition-colors">
+                            Security
                         </a>
                     </div>
                 </div>

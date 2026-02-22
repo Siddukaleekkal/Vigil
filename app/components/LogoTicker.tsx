@@ -3,16 +3,16 @@
 import { motion } from "framer-motion";
 
 const logos = [
-    { name: "Vercel", width: 82 },
-    { name: "Cursor", width: 78 },
-    { name: "OpenAI", width: 80 },
-    { name: "Coinbase", width: 90 },
-    { name: "Cash App", width: 80 },
-    { name: "Ramp", width: 66 },
-    { name: "Retool", width: 72 },
-    { name: "Arc", width: 48 },
-    { name: "Loom", width: 68 },
-    { name: "Notion", width: 76 },
+    { name: "Fortune 500", width: 90 },
+    { name: "Deloitte", width: 78 },
+    { name: "KPMG", width: 66 },
+    { name: "Accenture", width: 86 },
+    { name: "SAP", width: 52 },
+    { name: "Salesforce", width: 88 },
+    { name: "Microsoft", width: 84 },
+    { name: "Siemens", width: 76 },
+    { name: "Bosch", width: 62 },
+    { name: "Allianz", width: 72 },
 ];
 
 function LogoText({ name, width }: { name: string; width: number }) {
@@ -39,7 +39,7 @@ export default function LogoTicker() {
                 className="mx-auto max-w-[1200px] px-6"
             >
                 <p className="text-[13px] text-[#5C5F66] text-center mb-8 uppercase tracking-widest">
-                    Trusted by the best product teams
+                    Trusted by enterprise teams navigating AI regulation
                 </p>
             </motion.div>
 

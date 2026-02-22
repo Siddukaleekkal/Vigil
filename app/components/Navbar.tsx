@@ -5,10 +5,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
-    { label: "Product", href: "#product" },
-    { label: "Customers", href: "#customers" },
+    { label: "Platform", href: "#platform" },
+    { label: "Solutions", href: "#solutions" },
+    { label: "Frameworks", href: "#frameworks" },
     { label: "Pricing", href: "#pricing" },
-    { label: "Contact", href: "#contact" },
+    { label: "Resources", href: "#resources" },
 ];
 
 export default function Navbar() {
@@ -22,14 +23,12 @@ export default function Navbar() {
         const onScroll = () => {
             const currentScrollY = window.scrollY;
 
-            // Check if we're past the subtle visual threshold (e.g. 20px)
             setScrolled(currentScrollY > 20);
 
-            // Hide if scrolling down, show if scrolling up
             if (currentScrollY > lastScrollY && currentScrollY > 100) {
-                setHidden(true); // scrolling down
+                setHidden(true);
             } else {
-                setHidden(false); // scrolling up
+                setHidden(false);
             }
 
             lastScrollY = currentScrollY;
@@ -83,10 +82,10 @@ export default function Navbar() {
                     </a>
                     <a
                         href="#"
-                        id="nav-signup"
+                        id="nav-get-started"
                         className="text-[13px] font-medium bg-white text-black px-4 py-1.5 rounded-md hover:bg-white/90 transition-all duration-200"
                     >
-                        Sign up
+                        Get Started
                     </a>
                 </div>
 
@@ -133,7 +132,7 @@ export default function Navbar() {
                                 href="#"
                                 className="text-[14px] font-medium bg-white text-black px-4 py-2 rounded-md text-center mt-1"
                             >
-                                Sign up
+                                Get Started
                             </a>
                         </div>
                     </motion.div>

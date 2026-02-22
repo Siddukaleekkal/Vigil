@@ -2,9 +2,8 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
-import { TrendingUp, TrendingDown, Activity } from "lucide-react";
+import { TrendingUp, TrendingDown, Activity, Shield } from "lucide-react";
 
-// Generate mock data points
 function generateData(count: number, base: number, variance: number) {
     return Array.from({ length: count }, (_, i) => ({
         x: i,
@@ -22,7 +21,6 @@ function pointsToPath(points: { x: number; y: number }[], width: number, height:
         y: padding + ((maxY - p.y) / (maxY - minY || 1)) * (height - padding * 2),
     }));
 
-    // Create smooth curve through points
     let d = `M ${mapped[0].x} ${mapped[0].y}`;
     for (let i = 1; i < mapped.length; i++) {
         const prev = mapped[i - 1];
@@ -36,38 +34,36 @@ function pointsToPath(points: { x: number; y: number }[], width: number, height:
 
 const stats = [
     {
-        label: "Issues Completed",
-        value: "847",
-        change: "+12%",
+        label: "Compliance Score",
+        value: "94%",
+        change: "+8%",
         trend: "up" as const,
         color: "#4CAF50",
     },
     {
-        label: "Cycle Time",
-        value: "2.4d",
-        change: "-18%",
+        label: "Model Drift Alerts",
+        value: "3",
+        change: "-42%",
         trend: "down" as const,
         color: "#4191E2",
     },
     {
-        label: "Throughput",
-        value: "142/wk",
-        change: "+7%",
+        label: "Systems Monitored",
+        value: "47",
+        change: "+12",
         trend: "up" as const,
         color: "#8B5CF6",
     },
 ];
 
-function AnimatedChart() {
+function ComplianceChart() {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true });
-    const [data] = useState(() => generateData(24, 50, 20));
+    const [data] = useState(() => generateData(24, 80, 12));
     const width = 600;
     const height = 200;
 
     const { d } = pointsToPath(data, width, height);
-
-    // Fill path
     const { mapped } = pointsToPath(data, width, height);
     const lastPoint = mapped[mapped.length - 1];
     const firstPoint = mapped[0];
@@ -78,7 +74,7 @@ function AnimatedChart() {
             <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-auto">
                 <defs>
                     <linearGradient id="pulseGrad" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="rgba(94,106,210,0.2)" />
+                        <stop offset="0%" stopColor="rgba(76,175,80,0.2)" />
                         <stop offset="100%" stopColor="transparent" />
                     </linearGradient>
                     <clipPath id="chartClip">
@@ -93,7 +89,6 @@ function AnimatedChart() {
                     </clipPath>
                 </defs>
 
-                {/* Grid lines */}
                 {[0, 50, 100, 150, 200].map((y) => (
                     <line
                         key={y}
@@ -106,24 +101,22 @@ function AnimatedChart() {
                     />
                 ))}
 
-                {/* Chart area */}
                 <g clipPath="url(#chartClip)">
                     <path d={fillD} fill="url(#pulseGrad)" />
                     <path
                         d={d}
                         fill="none"
-                        stroke="rgba(94,106,210,0.6)"
+                        stroke="rgba(76,175,80,0.6)"
                         strokeWidth="2"
                     />
                 </g>
 
-                {/* Current value dot */}
                 {isInView && (
                     <motion.circle
                         cx={lastPoint.x}
                         cy={lastPoint.y}
                         r="4"
-                        fill="#5E6AD2"
+                        fill="#4CAF50"
                         initial={{ opacity: 0, scale: 0 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: 2, duration: 0.3 }}
@@ -134,7 +127,7 @@ function AnimatedChart() {
     );
 }
 
-function CycleTimeChart() {
+function DriftChart() {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true });
     const [data] = useState(() => generateData(24, 4, 1.5));
@@ -193,7 +186,7 @@ export default function PulseSection() {
     useEffect(() => setMounted(true), []);
 
     return (
-        <section className="py-24 relative" id="pulse">
+        <section className="py-24 relative" id="monitor">
             <div className="section-divider mb-24" />
 
             <div className="mx-auto max-w-[1200px] px-6">
@@ -208,15 +201,16 @@ export default function PulseSection() {
                         <div className="flex items-center justify-center gap-2 mb-4">
                             <Activity size={16} className="text-[#5E6AD2]" />
                             <span className="text-[13px] font-mono text-[#5C5F66] uppercase tracking-wider">
-                                Pulse
+                                Control Tower
                             </span>
                         </div>
                         <h2 className="text-[clamp(28px,3.5vw,42px)] font-medium leading-[1.1] tracking-[-0.02em] mb-4">
-                            Stay in sync with your team
+                            Runtime monitoring that never sleeps
                         </h2>
-                        <p className="text-[16px] text-[#8A8F98] max-w-[500px] mx-auto leading-relaxed">
-                            Real-time analytics and insights to keep your product development
-                            on track.
+                        <p className="text-[16px] text-[#8A8F98] max-w-[560px] mx-auto leading-relaxed">
+                            Track model drift, accuracy degradation, and compliance posture
+                            in real time. Automated triggers re-evaluate risk when performance
+                            thresholds are breached.
                         </p>
                     </motion.div>
                 </div>
@@ -268,14 +262,15 @@ export default function PulseSection() {
                             className="bg-[#0D0D0D] rounded-xl border border-white/[.06] p-5 card-hover"
                         >
                             <div className="flex items-center justify-between mb-4">
-                                <span className="text-[13px] font-medium text-white/80">
-                                    Issues Completed
+                                <span className="text-[13px] font-medium text-white/80 flex items-center gap-2">
+                                    <Shield size={14} className="text-[#4CAF50]" />
+                                    Compliance Score
                                 </span>
                                 <span className="text-[11px] text-[#5C5F66] font-mono">
                                     Last 24 weeks
                                 </span>
                             </div>
-                            <AnimatedChart />
+                            <ComplianceChart />
                         </motion.div>
 
                         <motion.div
@@ -286,14 +281,15 @@ export default function PulseSection() {
                             className="bg-[#0D0D0D] rounded-xl border border-white/[.06] p-5 card-hover"
                         >
                             <div className="flex items-center justify-between mb-4">
-                                <span className="text-[13px] font-medium text-white/80">
-                                    Cycle Time
+                                <span className="text-[13px] font-medium text-white/80 flex items-center gap-2">
+                                    <Activity size={14} className="text-[#4191E2]" />
+                                    Model Drift Index
                                 </span>
                                 <span className="text-[11px] text-[#5C5F66] font-mono">
-                                    Avg: 2.4 days
+                                    Avg: 0.023
                                 </span>
                             </div>
-                            <CycleTimeChart />
+                            <DriftChart />
                         </motion.div>
                     </div>
                 )}

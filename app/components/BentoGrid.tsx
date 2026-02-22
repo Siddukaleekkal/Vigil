@@ -4,36 +4,40 @@ import { motion } from "framer-motion";
 
 const features = [
     {
-        title: "Built for purpose",
+        title: "Risk-based classification",
         description:
-            "Linear is shaped by the practices and principles of world-class product teams.",
+            "Automatically classify every AI system into the Act's four risk tiers — Unacceptable, High, Limited, and Minimal — with structured evidence trails.",
         illustration: (
             <svg viewBox="0 0 300 200" className="w-full h-auto opacity-20">
                 <defs>
                     <linearGradient id="grid1" x1="0" y1="0" x2="1" y2="1">
-                        <stop offset="0%" stopColor="#5E6AD2" stopOpacity="0.3" />
-                        <stop offset="100%" stopColor="#ffffff" stopOpacity="0.05" />
+                        <stop offset="0%" stopColor="#EB5757" stopOpacity="0.3" />
+                        <stop offset="50%" stopColor="#F2C94C" stopOpacity="0.2" />
+                        <stop offset="100%" stopColor="#4CAF50" stopOpacity="0.15" />
                     </linearGradient>
                 </defs>
-                {/* Abstract geometric shape - purpose/structure */}
-                <rect x="60" y="30" width="180" height="140" rx="8" fill="none" stroke="url(#grid1)" strokeWidth="1" />
-                <line x1="60" y1="70" x2="240" y2="70" stroke="rgba(255,255,255,0.06)" strokeWidth="1" />
-                <line x1="60" y1="110" x2="240" y2="110" stroke="rgba(255,255,255,0.06)" strokeWidth="1" />
-                <line x1="140" y1="30" x2="140" y2="170" stroke="rgba(255,255,255,0.06)" strokeWidth="1" />
-                <circle cx="140" cy="100" r="30" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="1" strokeDasharray="4 4" />
-                <circle cx="140" cy="100" r="8" fill="rgba(94,106,210,0.3)" />
-                {/* Corner details */}
-                <path d="M60 30 L80 30 L80 50" fill="none" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5" />
-                <path d="M240 30 L220 30 L220 50" fill="none" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5" />
-                <path d="M60 170 L80 170 L80 150" fill="none" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5" />
-                <path d="M240 170 L220 170 L220 150" fill="none" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5" />
+                {/* Risk pyramid */}
+                <polygon points="150,25 260,170 40,170" fill="none" stroke="url(#grid1)" strokeWidth="1.5" />
+                <line x1="80" y1="110" x2="220" y2="110" stroke="rgba(255,255,255,0.06)" strokeWidth="1" />
+                <line x1="105" y1="75" x2="195" y2="75" stroke="rgba(255,255,255,0.06)" strokeWidth="1" />
+                <line x1="60" y1="145" x2="240" y2="145" stroke="rgba(255,255,255,0.06)" strokeWidth="1" />
+                {/* Risk level indicators */}
+                <circle cx="150" cy="50" r="6" fill="rgba(235,87,87,0.4)" />
+                <circle cx="150" cy="90" r="6" fill="rgba(242,201,76,0.3)" />
+                <circle cx="150" cy="125" r="6" fill="rgba(65,145,226,0.3)" />
+                <circle cx="150" cy="155" r="6" fill="rgba(76,175,80,0.3)" />
+                {/* Labels */}
+                <text x="170" y="54" fill="rgba(235,87,87,0.5)" fontSize="8" fontFamily="monospace">PROHIBITED</text>
+                <text x="170" y="94" fill="rgba(242,201,76,0.4)" fontSize="8" fontFamily="monospace">HIGH</text>
+                <text x="170" y="129" fill="rgba(65,145,226,0.4)" fontSize="8" fontFamily="monospace">LIMITED</text>
+                <text x="170" y="159" fill="rgba(76,175,80,0.4)" fontSize="8" fontFamily="monospace">MINIMAL</text>
             </svg>
         ),
     },
     {
-        title: "Powered by AI agents",
+        title: "Extraterritorial reach",
         description:
-            "Designed for workflows shared by humans and agents, from PRD to PR.",
+            "If your AI outputs reach the EU market, you're in scope. Vigil maps your global exposure and identifies compliance obligations automatically.",
         illustration: (
             <svg viewBox="0 0 300 200" className="w-full h-auto opacity-20">
                 <defs>
@@ -42,32 +46,30 @@ const features = [
                         <stop offset="100%" stopColor="#5E6AD2" stopOpacity="0.1" />
                     </linearGradient>
                 </defs>
-                {/* Neural network inspired */}
-                <circle cx="80" cy="60" r="6" fill="rgba(139,92,246,0.3)" />
-                <circle cx="80" cy="100" r="6" fill="rgba(139,92,246,0.3)" />
-                <circle cx="80" cy="140" r="6" fill="rgba(139,92,246,0.3)" />
-                <circle cx="150" cy="80" r="6" fill="rgba(94,106,210,0.4)" />
-                <circle cx="150" cy="120" r="6" fill="rgba(94,106,210,0.4)" />
-                <circle cx="220" cy="100" r="8" fill="rgba(94,106,210,0.5)" />
-                {/* Connections */}
-                <line x1="86" y1="60" x2="144" y2="80" stroke="rgba(255,255,255,0.06)" strokeWidth="1" />
-                <line x1="86" y1="60" x2="144" y2="120" stroke="rgba(255,255,255,0.04)" strokeWidth="1" />
-                <line x1="86" y1="100" x2="144" y2="80" stroke="rgba(255,255,255,0.06)" strokeWidth="1" />
-                <line x1="86" y1="100" x2="144" y2="120" stroke="rgba(255,255,255,0.06)" strokeWidth="1" />
-                <line x1="86" y1="140" x2="144" y2="80" stroke="rgba(255,255,255,0.04)" strokeWidth="1" />
-                <line x1="86" y1="140" x2="144" y2="120" stroke="rgba(255,255,255,0.06)" strokeWidth="1" />
-                <line x1="156" y1="80" x2="212" y2="100" stroke="rgba(255,255,255,0.08)" strokeWidth="1" />
-                <line x1="156" y1="120" x2="212" y2="100" stroke="rgba(255,255,255,0.08)" strokeWidth="1" />
+                {/* Globe representation */}
+                <circle cx="150" cy="100" r="60" fill="none" stroke="rgba(94,106,210,0.15)" strokeWidth="1.5" />
+                <ellipse cx="150" cy="100" rx="60" ry="25" fill="none" stroke="rgba(94,106,210,0.1)" strokeWidth="1" />
+                <ellipse cx="150" cy="100" rx="25" ry="60" fill="none" stroke="rgba(94,106,210,0.1)" strokeWidth="1" />
+                {/* Connection lines - US to EU */}
+                <circle cx="110" cy="85" r="4" fill="rgba(65,145,226,0.5)" />
+                <text x="96" y="78" fill="rgba(65,145,226,0.4)" fontSize="7" fontFamily="monospace">US</text>
+                <circle cx="170" cy="80" r="4" fill="rgba(139,92,246,0.5)" />
+                <text x="178" y="78" fill="rgba(139,92,246,0.4)" fontSize="7" fontFamily="monospace">EU</text>
+                <line x1="114" y1="85" x2="166" y2="80" stroke="rgba(255,255,255,0.12)" strokeWidth="1" strokeDasharray="4 3" />
+                {/* More nodes */}
+                <circle cx="140" cy="120" r="3" fill="rgba(76,175,80,0.4)" />
+                <circle cx="180" cy="105" r="3" fill="rgba(242,201,76,0.4)" />
+                <circle cx="130" cy="95" r="3" fill="rgba(235,87,87,0.4)" />
                 {/* Pulse rings */}
-                <circle cx="220" cy="100" r="16" fill="none" stroke="rgba(94,106,210,0.15)" strokeWidth="1" />
-                <circle cx="220" cy="100" r="24" fill="none" stroke="rgba(94,106,210,0.08)" strokeWidth="1" />
+                <circle cx="170" cy="80" r="12" fill="none" stroke="rgba(139,92,246,0.15)" strokeWidth="1" />
+                <circle cx="170" cy="80" r="20" fill="none" stroke="rgba(139,92,246,0.08)" strokeWidth="1" />
             </svg>
         ),
     },
     {
-        title: "Designed for speed",
+        title: "Audit-ready by design",
         description:
-            "Reduces noise and restores momentum to help teams ship with high velocity and focus.",
+            "Automated documentation generation, tamper-resistant logging, and versioned compliance records that meet Articles 11-12 requirements out of the box.",
         illustration: (
             <svg viewBox="0 0 300 200" className="w-full h-auto opacity-20">
                 <defs>
@@ -76,18 +78,20 @@ const features = [
                         <stop offset="100%" stopColor="rgba(255,255,255,0.15)" />
                     </linearGradient>
                 </defs>
-                {/* Speed lines */}
-                <line x1="40" y1="60" x2="260" y2="60" stroke="url(#speed1)" strokeWidth="1.5" />
-                <line x1="80" y1="80" x2="260" y2="80" stroke="url(#speed1)" strokeWidth="1" />
-                <line x1="60" y1="100" x2="260" y2="100" stroke="url(#speed1)" strokeWidth="2" />
-                <line x1="100" y1="120" x2="260" y2="120" stroke="url(#speed1)" strokeWidth="1" />
-                <line x1="50" y1="140" x2="260" y2="140" stroke="url(#speed1)" strokeWidth="1.5" />
-                {/* Arrow */}
-                <polygon points="260,90 260,110 280,100" fill="rgba(255,255,255,0.12)" />
-                {/* Dot trail */}
-                <circle cx="250" cy="100" r="3" fill="rgba(255,255,255,0.2)" />
-                <circle cx="240" cy="100" r="2" fill="rgba(255,255,255,0.1)" />
-                <circle cx="232" cy="100" r="1.5" fill="rgba(255,255,255,0.06)" />
+                {/* Document stack */}
+                <rect x="90" y="25" width="120" height="150" rx="6" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="1" />
+                <rect x="95" y="30" width="110" height="140" rx="4" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="1" />
+                {/* Document lines */}
+                <line x1="108" y1="55" x2="190" y2="55" stroke="rgba(255,255,255,0.06)" strokeWidth="1.5" />
+                <line x1="108" y1="70" x2="175" y2="70" stroke="rgba(255,255,255,0.04)" strokeWidth="1" />
+                <line x1="108" y1="85" x2="185" y2="85" stroke="rgba(255,255,255,0.04)" strokeWidth="1" />
+                <line x1="108" y1="100" x2="165" y2="100" stroke="rgba(255,255,255,0.04)" strokeWidth="1" />
+                {/* Checkmarks */}
+                <circle cx="108" cy="120" r="8" fill="rgba(76,175,80,0.15)" stroke="rgba(76,175,80,0.3)" strokeWidth="1" />
+                <path d="M104 120 L107 123 L113 117" fill="none" stroke="rgba(76,175,80,0.5)" strokeWidth="1.5" />
+                <text x="120" y="123" fill="rgba(76,175,80,0.4)" fontSize="8" fontFamily="monospace">VERIFIED</text>
+                {/* Shield */}
+                <path d="M150 140 L150 155 Q150 165 160 165 Q170 165 170 155 L170 140 Q160 135 150 140Z" fill="rgba(94,106,210,0.15)" stroke="rgba(94,106,210,0.3)" strokeWidth="1" />
             </svg>
         ),
     },

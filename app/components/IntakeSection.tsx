@@ -1,119 +1,81 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Hash, MoreVertical, Plus, MoreHorizontal } from "lucide-react";
+import { Shield, AlertTriangle, Info, CheckCircle2, XOctagon, MoreHorizontal } from "lucide-react";
 
-// Mock issue data
-const todoIssues = [
+// AI System inventory
+const highRiskSystems = [
     {
-        id: "ENG-926",
-        title: "Redesign onboarding flow",
-        labels: [{ name: "Design", color: "#8B5CF6" }],
-        avatar: "from-[#EB5757] to-[#F2C94C]",
+        id: "SYS-001",
+        title: "Credit Scoring Engine v3.2",
+        riskLevel: "high" as const,
+        labels: [{ name: "Finance", color: "#F2C94C" }, { name: "Annex III", color: "#EB5757" }],
+        article: "Art. 6(2)",
     },
     {
-        id: "ENG-928",
-        title: "Add dark mode toggle to settings",
-        labels: [
-            { name: "Feature", color: "#4191E2" },
-            { name: "UI", color: "#5E6AD2" },
-        ],
-        avatar: "from-[#4CAF50] to-[#4191E2]",
+        id: "SYS-004",
+        title: "Resume Screening & CV Analyzer",
+        riskLevel: "high" as const,
+        labels: [{ name: "HR", color: "#8B5CF6" }, { name: "Annex III", color: "#EB5757" }],
+        article: "Art. 6(2)",
     },
     {
-        id: "ENG-930",
-        title: "Migrate auth to Passkeys",
-        labels: [{ name: "Security", color: "#EB5757" }],
-        avatar: "from-[#5E6AD2] to-[#8B5CF6]",
+        id: "SYS-007",
+        title: "Patient Triage Recommendation",
+        riskLevel: "high" as const,
+        labels: [{ name: "Healthcare", color: "#4CAF50" }],
+        article: "Art. 6(2)",
     },
 ];
 
-const inProgressIssues = [
+const limitedRiskSystems = [
     {
-        id: "ENG-1457",
-        title: "Implement real-time collaboration",
-        labels: [{ name: "Feature", color: "#4191E2" }],
-        avatar: "from-[#4191E2] to-[#5E6AD2]",
+        id: "SYS-012",
+        title: "Customer Support Chatbot",
+        riskLevel: "limited" as const,
+        labels: [{ name: "Transparency", color: "#4191E2" }],
+        article: "Art. 50",
     },
     {
-        id: "ENG-1460",
-        title: "Fix memory leak in WebSocket handler",
-        labels: [
-            { name: "Bug", color: "#EB5757" },
-            { name: "Performance", color: "#F2C94C" },
-        ],
-        avatar: "from-[#F2C94C] to-[#EB5757]",
+        id: "SYS-015",
+        title: "Marketing Content Generator",
+        riskLevel: "limited" as const,
+        labels: [{ name: "GenAI", color: "#5E6AD2" }],
+        article: "Art. 50",
     },
 ];
 
-function SlackThread() {
+function RiskBadge({ level }: { level: "high" | "limited" | "minimal" | "unacceptable" }) {
+    const config = {
+        unacceptable: { color: "#EB5757", icon: <XOctagon size={12} />, label: "Prohibited" },
+        high: { color: "#F2C94C", icon: <AlertTriangle size={12} />, label: "High Risk" },
+        limited: { color: "#4191E2", icon: <Info size={12} />, label: "Limited" },
+        minimal: { color: "#4CAF50", icon: <CheckCircle2 size={12} />, label: "Minimal" },
+    };
+    const c = config[level];
     return (
-        <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="bg-[#141414] rounded-xl border border-white/[.06] overflow-hidden max-w-[400px]"
+        <span
+            className="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full border font-medium"
+            style={{ color: c.color, borderColor: `${c.color}40`, backgroundColor: `${c.color}10` }}
         >
-            <div className="flex items-center justify-between px-4 py-2.5 border-b border-white/[.04]">
-                <div className="flex items-center gap-2 text-[13px]">
-                    <Hash size={14} className="text-[#5C5F66]" />
-                    <span className="text-white/70">
-                        Thread in <span className="font-semibold text-white">#feedback</span>
-                    </span>
-                </div>
-                <MoreVertical size={14} className="text-[#5C5F66]" />
-            </div>
-
-            <div className="p-4 space-y-3">
-                <div className="flex items-start gap-2.5">
-                    <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#4191E2] to-[#5E6AD2] flex-shrink-0" />
-                    <div>
-                        <div className="flex items-center gap-2">
-                            <span className="text-[13px] font-medium text-white">lena</span>
-                            <span className="text-[11px] text-[#5C5F66]">2:39 PM</span>
-                        </div>
-                        <p className="text-[13px] text-[#8A8F98] leading-relaxed mt-0.5">
-                            Hey team, customer <span className="text-[#4191E2]">@acme</span> reported that
-                            the export feature is timing out on large datasets. Can someone look into this?
-                        </p>
-                    </div>
-                </div>
-
-                <div className="flex items-start gap-2.5">
-                    <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#F2C94C] to-[#EB5757] flex-shrink-0" />
-                    <div>
-                        <div className="flex items-center gap-2">
-                            <span className="text-[13px] font-medium text-white">kai</span>
-                            <span className="text-[11px] text-[#5C5F66]">2:41 PM</span>
-                        </div>
-                        <p className="text-[13px] text-[#8A8F98] leading-relaxed mt-0.5">
-                            I&apos;ll create a Linear issue for this. Sounds like a priority fix.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </motion.div>
+            {c.icon}
+            {c.label}
+        </span>
     );
 }
 
-function IssueRow({
-    issue,
-    statusIcon,
-}: {
-    issue: (typeof todoIssues)[0];
-    statusIcon: React.ReactNode;
-}) {
+function SystemRow({ system }: { system: { id: string; title: string; riskLevel: "high" | "limited" | "minimal" | "unacceptable"; labels: { name: string; color: string }[]; article: string } }) {
     return (
-        <div className="flex items-center gap-3 px-3 py-2 hover:bg-white/[.02] transition-colors rounded group cursor-pointer">
-            {statusIcon}
+        <div className="flex items-center gap-3 px-4 py-3 hover:bg-white/[.02] transition-colors cursor-pointer group">
+            <RiskBadge level={system.riskLevel} />
             <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
-                    <span className="text-[13px] text-white truncate">{issue.title}</span>
+                    <span className="text-[12px] text-[#5C5F66] font-mono">{system.id}</span>
+                    <span className="text-[13px] text-white truncate">{system.title}</span>
                 </div>
             </div>
             <div className="flex items-center gap-1.5 flex-shrink-0">
-                {issue.labels.map((label) => (
+                {system.labels.map((label) => (
                     <span
                         key={label.name}
                         className="text-[10px] px-1.5 py-0.5 rounded-full border"
@@ -127,45 +89,14 @@ function IssueRow({
                     </span>
                 ))}
             </div>
-            <div
-                className={`w-5 h-5 rounded-full bg-gradient-to-br ${issue.avatar} flex-shrink-0`}
-            />
-        </div>
-    );
-}
-
-function KanbanColumn({
-    title,
-    count,
-    issues,
-    statusIcon,
-}: {
-    title: string;
-    count: number;
-    issues: typeof todoIssues;
-    statusIcon: React.ReactNode;
-}) {
-    return (
-        <div className="flex-1 min-w-[250px]">
-            <div className="flex items-center gap-2 px-3 py-2 text-[13px]">
-                <Plus size={12} className="text-[#5C5F66] opacity-0 group-hover:opacity-100" />
-                <MoreHorizontal size={12} className="text-[#5C5F66]" />
-                {statusIcon}
-                <span className="text-white/70 font-medium">{title}</span>
-                <span className="text-[#5C5F66] text-[12px]">{count}</span>
-            </div>
-            <div className="space-y-0.5">
-                {issues.map((issue) => (
-                    <IssueRow key={issue.id} issue={issue} statusIcon={statusIcon} />
-                ))}
-            </div>
+            <span className="text-[11px] text-[#5C5F66] font-mono">{system.article}</span>
         </div>
     );
 }
 
 export default function IntakeSection() {
     return (
-        <section className="py-24 relative" id="intake">
+        <section className="py-24 relative" id="classify">
             <div className="section-divider mb-24" />
 
             <div className="mx-auto max-w-[1200px] px-6">
@@ -178,9 +109,9 @@ export default function IntakeSection() {
                         transition={{ duration: 0.7 }}
                     >
                         <h2 className="text-[clamp(32px,4vw,48px)] font-medium leading-[1.1] tracking-[-0.02em]">
-                            Make product
+                            Classify every AI
                             <br />
-                            operations self-driving
+                            system automatically
                         </h2>
                     </motion.div>
 
@@ -191,16 +122,17 @@ export default function IntakeSection() {
                         transition={{ duration: 0.7, delay: 0.15 }}
                     >
                         <p className="text-[clamp(18px,1.6vw,22px)] text-[#8A8F98] leading-relaxed mb-4">
-                            Turn conversations and customer feedback into actionable issues
-                            that are routed, labeled, and prioritized for the right team.
+                            Map your entire AI portfolio to the Act&apos;s risk hierarchy. Vigil scans
+                            metadata, use cases, and deployment contexts to determine whether each
+                            system is prohibited, high-risk, limited, or minimal.
                         </p>
                         <a
                             href="#"
                             className="inline-flex items-center gap-2 text-[14px] text-[#5C5F66] hover:text-white/70 transition-colors group"
-                            id="intake-link"
+                            id="classify-link"
                         >
                             <span className="font-mono text-[13px]">1.0</span>
-                            <span>Intake</span>
+                            <span>AI Inventory</span>
                             <span className="group-hover:translate-x-0.5 transition-transform">
                                 →
                             </span>
@@ -208,10 +140,54 @@ export default function IntakeSection() {
                     </motion.div>
                 </div>
 
-                {/* Mockup: Slack + Kanban */}
-                <div className="grid grid-cols-1 lg:grid-cols-[380px_1fr] gap-6">
-                    <SlackThread />
+                {/* AI System Registry mockup */}
+                <div className="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-6">
+                    {/* Risk distribution card */}
+                    <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                        className="bg-[#0D0D0D] rounded-xl border border-white/[.06] overflow-hidden p-5"
+                    >
+                        <div className="flex items-center gap-2 mb-5">
+                            <Shield size={14} className="text-[#5E6AD2]" />
+                            <span className="text-[13px] font-medium text-white/80">Risk Distribution</span>
+                        </div>
+                        <div className="space-y-4">
+                            {[
+                                { label: "High Risk", count: 12, total: 47, color: "#F2C94C" },
+                                { label: "Limited Risk", count: 18, total: 47, color: "#4191E2" },
+                                { label: "Minimal Risk", count: 15, total: 47, color: "#4CAF50" },
+                                { label: "Unclassified", count: 2, total: 47, color: "#5C5F66" },
+                            ].map((item) => (
+                                <div key={item.label}>
+                                    <div className="flex items-center justify-between mb-1.5">
+                                        <span className="text-[12px] text-[#8A8F98]">{item.label}</span>
+                                        <span className="text-[12px] text-[#5C5F66] font-mono">{item.count}</span>
+                                    </div>
+                                    <div className="h-1.5 bg-white/[.04] rounded-full overflow-hidden">
+                                        <motion.div
+                                            className="h-full rounded-full"
+                                            style={{ backgroundColor: item.color }}
+                                            initial={{ width: 0 }}
+                                            whileInView={{ width: `${(item.count / item.total) * 100}%` }}
+                                            viewport={{ once: true }}
+                                            transition={{ duration: 1, delay: 0.4 }}
+                                        />
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                        <div className="mt-6 pt-4 border-t border-white/[.04]">
+                            <div className="flex items-center justify-between">
+                                <span className="text-[12px] text-[#5C5F66]">Total Systems</span>
+                                <span className="text-[18px] font-medium text-white">47</span>
+                            </div>
+                        </div>
+                    </motion.div>
 
+                    {/* System registry list */}
                     <motion.div
                         initial={{ opacity: 0, x: 20 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -219,26 +195,30 @@ export default function IntakeSection() {
                         transition={{ duration: 0.6, delay: 0.3 }}
                         className="bg-[#0D0D0D] rounded-xl border border-white/[.06] overflow-hidden"
                     >
-                        <div className="flex overflow-x-auto">
-                            <KanbanColumn
-                                title="Todo"
-                                count={71}
-                                issues={todoIssues}
-                                statusIcon={
-                                    <div className="w-3.5 h-3.5 rounded-full border-2 border-[#8A8F98]" />
-                                }
-                            />
-                            <div className="w-px bg-white/[.04] flex-shrink-0" />
-                            <KanbanColumn
-                                title="In Progress"
-                                count={3}
-                                issues={inProgressIssues}
-                                statusIcon={
-                                    <div className="w-3.5 h-3.5 rounded-full border-2 border-[#F2C94C] relative">
-                                        <div className="absolute inset-0 rounded-full bg-[#F2C94C] opacity-30" />
-                                    </div>
-                                }
-                            />
+                        {/* Section: High Risk */}
+                        <div className="px-4 py-2.5 border-b border-white/[.04] flex items-center gap-2">
+                            <AlertTriangle size={12} className="text-[#F2C94C]" />
+                            <span className="text-[12px] font-medium text-[#F2C94C]">HIGH RISK</span>
+                            <span className="text-[11px] text-[#5C5F66] bg-white/[.04] px-1.5 py-0.5 rounded-full ml-1">12</span>
+                            <MoreHorizontal size={12} className="text-[#5C5F66] ml-auto" />
+                        </div>
+                        <div className="divide-y divide-white/[.04]">
+                            {highRiskSystems.map((system) => (
+                                <SystemRow key={system.id} system={system} />
+                            ))}
+                        </div>
+
+                        {/* Section: Limited Risk */}
+                        <div className="px-4 py-2.5 border-t border-b border-white/[.04] flex items-center gap-2">
+                            <Info size={12} className="text-[#4191E2]" />
+                            <span className="text-[12px] font-medium text-[#4191E2]">LIMITED RISK</span>
+                            <span className="text-[11px] text-[#5C5F66] bg-white/[.04] px-1.5 py-0.5 rounded-full ml-1">18</span>
+                            <MoreHorizontal size={12} className="text-[#5C5F66] ml-auto" />
+                        </div>
+                        <div className="divide-y divide-white/[.04]">
+                            {limitedRiskSystems.map((system) => (
+                                <SystemRow key={system.id} system={system} />
+                            ))}
                         </div>
                     </motion.div>
                 </div>

@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { MoveRight, PhoneCall, PlayCircle } from "lucide-react";
+import { MoveRight, PlayCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 function Hero() {
@@ -27,10 +27,30 @@ function Hero() {
         <div className="w-full relative overflow-hidden bg-black text-white">
             <div className="container mx-auto px-6">
                 <div className="flex gap-8 py-20 lg:py-40 items-center justify-center flex-col relative z-10">
+                    {/* Urgency badge */}
+                    <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2, duration: 0.5 }}
+                    >
+                        <a
+                            href="#timeline"
+                            className="inline-flex items-center gap-2 text-[13px] text-[#8A8F98] hover:text-white transition-colors group border border-white/[.08] rounded-full px-4 py-1.5 bg-white/[.02] hover:bg-white/[.05]"
+                            id="hero-deadline-badge"
+                        >
+                            <span className="relative flex h-2 w-2">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#EB5757] opacity-75" />
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#EB5757]" />
+                            </span>
+                            <span>EU AI Act enforcement begins <strong className="text-white">August 2, 2026</strong></span>
+                            <span className="group-hover:translate-x-0.5 transition-transform">→</span>
+                        </a>
+                    </motion.div>
+
                     <div className="flex gap-4 flex-col items-center">
                         <h1 className="text-4xl md:text-7xl max-w-4xl tracking-tighter text-center font-medium leading-[1.1]">
                             <span className="text-white block mb-4">Governance evolved.</span>
-                            <span className="text-white/60">Vigil makes conformity testing</span>
+                            <span className="text-white/60">Vigil makes AI compliance</span>
                             <span className="relative flex w-full justify-center overflow-hidden text-center md:pb-4 md:pt-1">
                                 &nbsp;
                                 {titles.map((title, index) => (
@@ -58,14 +78,14 @@ function Hero() {
                         </h1>
 
                         <p className="text-lg md:text-xl leading-relaxed tracking-tight text-[#8A8F98] max-w-2xl text-center mt-6">
-                            Deploy the first AI-powered platform designed to navigate complex regulatory landscapes. Vigil monitors your infrastructure in real time to ensure every system meets global standards without manual intervention.
+                            The first AI-powered governance platform built for the EU AI Act. Automate risk classification, conformity assessments, and technical documentation — so you&apos;re audit-ready before the deadline.
                         </p>
                     </div>
                     <div className="flex flex-row gap-4 mt-8">
-                        <Button size="lg" className="gap-2 bg-white text-black hover:bg-white/90 rounded-full px-6 font-medium">
+                        <Button size="lg" className="gap-2 bg-white text-black hover:bg-white/90 rounded-full px-6 font-medium" id="hero-cta-trial">
                             Start Free Trial <MoveRight className="w-4 h-4" />
                         </Button>
-                        <Button size="lg" className="gap-2 border-white/10 text-white hover:bg-white/10 rounded-full px-6 transition-colors" variant="outline">
+                        <Button size="lg" className="gap-2 border-white/10 text-white hover:bg-white/10 rounded-full px-6 transition-colors" variant="outline" id="hero-cta-demo">
                             Watch Demo <PlayCircle className="w-4 h-4" />
                         </Button>
                     </div>
