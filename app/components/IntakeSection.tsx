@@ -126,17 +126,6 @@ export default function IntakeSection() {
                             metadata, use cases, and deployment contexts to determine whether each
                             system is prohibited, high-risk, limited, or minimal.
                         </p>
-                        <a
-                            href="#"
-                            className="inline-flex items-center gap-2 text-[14px] text-[#5C5F66] hover:text-white/70 transition-colors group"
-                            id="classify-link"
-                        >
-                            <span className="font-mono text-[13px]">1.0</span>
-                            <span>AI Inventory</span>
-                            <span className="group-hover:translate-x-0.5 transition-transform">
-                                →
-                            </span>
-                        </a>
                     </motion.div>
                 </div>
 

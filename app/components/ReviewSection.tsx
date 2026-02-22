@@ -122,17 +122,6 @@ export default function ReviewSection() {
                             you to be. Vigil shows the before and after of every compliance
                             control, with automated remediation recommendations.
                         </p>
-                        <a
-                            href="#"
-                            className="inline-flex items-center gap-2 text-[14px] text-[#5C5F66] hover:text-white/70 transition-colors group"
-                            id="review-link"
-                        >
-                            <span className="font-mono text-[13px]">4.0</span>
-                            <span>Assess</span>
-                            <span className="group-hover:translate-x-0.5 transition-transform">
-                                →
-                            </span>
-                        </a>
                     </motion.div>
                 </div>
 

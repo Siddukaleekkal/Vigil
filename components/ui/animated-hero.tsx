@@ -34,7 +34,9 @@ function Hero() {
                         transition={{ delay: 0.2, duration: 0.5 }}
                     >
                         <a
-                            href="#timeline"
+                            href="https://artificialintelligenceact.eu/"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 text-[13px] text-[#8A8F98] hover:text-white transition-colors group border border-white/[.08] rounded-full px-4 py-1.5 bg-white/[.02] hover:bg-white/[.05]"
                             id="hero-deadline-badge"
                         >
