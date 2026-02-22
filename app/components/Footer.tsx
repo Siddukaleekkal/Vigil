@@ -15,43 +15,35 @@ const footerColumns = [
     {
         title: "Features",
         links: [
-            "Asks",
-            "Agents",
-            "Customer Requests",
             "Insights",
-            "Mobile",
             "Integrations",
             "Changelog",
         ],
     },
     {
         title: "Company",
-        links: ["About", "Customers", "Careers", "Blog", "Method", "Quality", "Brand"],
+        links: ["About", "Customers", "Quality", "Brand"],
     },
     {
         title: "Resources",
         links: [
-            "Switch",
-            "Download",
             "Documentation",
             "Developers",
-            "Status",
             "Enterprise",
-            "Startups",
         ],
     },
     {
         title: "Connect",
-        links: ["Contact us", "Community", "X (Twitter)", "GitHub", "YouTube"],
+        links: ["Contact us", "Community"],
     },
 ];
 
 export default function Footer() {
     return (
-        <footer className="relative" id="footer">
+        <footer className="relative bg-black" id="footer">
             <div className="section-divider" />
 
-            <div className="mx-auto max-w-[1200px] px-6 py-16">
+            <div className="mx-auto max-w-[1200px] px-6 py-8">
                 <motion.div
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
@@ -64,7 +56,7 @@ export default function Footer() {
                         <img
                             src="/vigil-logo.png"
                             alt="Vigil"
-                            className="h-5 w-auto invert mix-blend-screen opacity-40"
+                            className="h-20 w-auto invert mix-blend-screen opacity-80"
                         />
                     </div>
 
@@ -91,16 +83,19 @@ export default function Footer() {
                 </motion.div>
 
                 {/* Bottom legal */}
-                <div className="mt-16 pt-6 border-t border-white/[.04] flex flex-wrap items-center gap-4 text-[12px] text-[#5C5F66]">
-                    <a href="#" className="hover:text-white/50 transition-colors">
-                        Privacy
-                    </a>
-                    <a href="#" className="hover:text-white/50 transition-colors">
-                        Terms
-                    </a>
-                    <a href="#" className="hover:text-white/50 transition-colors">
-                        DPA
-                    </a>
+                <div className="mt-8 pt-4 border-t border-white/[.04] flex flex-wrap justify-between items-center gap-4 text-[12px] text-[#5C5F66]">
+                    <span>&copy; 2026 Vigil. All rights reserved.</span>
+                    <div className="flex gap-4">
+                        <a href="#" className="hover:text-white/50 transition-colors">
+                            Privacy
+                        </a>
+                        <a href="#" className="hover:text-white/50 transition-colors">
+                            Terms
+                        </a>
+                        <a href="#" className="hover:text-white/50 transition-colors">
+                            DPA
+                        </a>
+                    </div>
                 </div>
             </div>
         </footer>

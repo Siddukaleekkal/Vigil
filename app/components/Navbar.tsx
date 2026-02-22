@@ -6,10 +6,8 @@ import { Menu, X } from "lucide-react";
 
 const navLinks = [
     { label: "Product", href: "#product" },
-    { label: "Resources", href: "#resources" },
     { label: "Customers", href: "#customers" },
     { label: "Pricing", href: "#pricing" },
-    { label: "Now", href: "#now" },
     { label: "Contact", href: "#contact" },
 ];
 
@@ -80,7 +78,7 @@ export default function Navbar() {
                 <div className="hidden md:flex items-center gap-3">
                     <div className="w-px h-4 bg-white/[.1]" />
                     <a
-                        href="#"
+                        href="/login"
                         id="nav-login"
                         className="text-[13px] text-[#8A8F98] hover:text-white transition-colors duration-200 px-2"
                     >
@@ -129,7 +127,7 @@ export default function Navbar() {
                             ))}
                             <div className="h-px bg-white/[.06] my-2" />
                             <a
-                                href="#"
+                                href="/login"
                                 className="text-[14px] text-[#8A8F98] hover:text-white py-2"
                             >
                                 Log in
